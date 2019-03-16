@@ -4,8 +4,6 @@ this is a recurrent neural network for the
 <a href="https://en.wikipedia.org/wiki/Necker_cube">Necker cube</a> 
 bistable perception phenomenon
 
-<img src="https://en.wikipedia.org/wiki/Necker_cube#/media/File:2_necker_cubes.svg" alt="temporal dynamics of necker" width=600>
-
 
 the figure below shows the network internal states over time, each line represents the activity time course of one neuron, and the two colors represent the two interpretations
 
