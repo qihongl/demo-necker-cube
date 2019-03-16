@@ -44,17 +44,18 @@ wts_necker_mech = np.vstack(
 
 # show the necker cube weights
 f, ax = plt.subplots(1, 1, figsize=(14, 12))
-# im = ax.imshow(wts_necker_mech, cmap='bone')
 sns.heatmap(
     wts_necker_mech,
     cmap='RdBu_r', linewidths=.5, annot=True,
     square=True,
 )
-ax.set_xticks(range(n_nodes*n_percepts))
-ax.set_xticklabels(all_nodes + [n+'\'' for n in all_nodes])
-ax.set_yticks(range(n_nodes*n_percepts))
+ax_tick_locs = np.arange(n_nodes*n_percepts)+.5
+ax.set_xticks(ax_tick_locs)
+ax.set_xticklabels(all_nodes + [n+'\'' for n in all_nodes], rotation=45)
+ax.set_yticks(ax_tick_locs)
 ax.set_yticklabels(all_nodes + [n+'\'' for n in all_nodes], rotation=0)
 ax.set_title('Connection weights, the necker model')
+f.tight_layout()
 f.savefig(os.path.join(img_path, 'wts.png'))
 
 # build the model
