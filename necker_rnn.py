@@ -2,10 +2,15 @@
 the necker cube bistable percepts phenomena
 implemented with a recurrent neural network mechanism
 """
-
+import os
 import numpy as np
 import psyneulink as pnl
 import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(style='white', context='poster', font_scale=.8)
+np.random.seed(0)
+
+img_path = 'imgs/'
 
 # constants
 excit_level = 1
@@ -38,15 +43,19 @@ wts_necker_mech = np.vstack(
 )
 
 # show the necker cube weights
-f, ax = plt.subplots(1, 1, figsize=(12, 10))
-im = ax.imshow(wts_necker_mech, cmap='bone')
+f, ax = plt.subplots(1, 1, figsize=(14, 12))
+# im = ax.imshow(wts_necker_mech, cmap='bone')
+sns.heatmap(
+    wts_necker_mech,
+    cmap='RdBu_r', linewidths=.5, annot=True,
+    square=True,
+)
 ax.set_xticks(range(n_nodes*n_percepts))
 ax.set_xticklabels(all_nodes + [n+'\'' for n in all_nodes])
 ax.set_yticks(range(n_nodes*n_percepts))
-ax.set_yticklabels(all_nodes + [n+'\'' for n in all_nodes])
-ax.set_title('weights, the necker model')
-f.colorbar(im, ax=ax)
-
+ax.set_yticklabels(all_nodes + [n+'\'' for n in all_nodes], rotation=0)
+ax.set_title('Connection weights, the necker model')
+f.savefig(os.path.join(img_path, 'wts.png'))
 
 # build the model
 function_necker_mech = pnl.Linear
@@ -77,10 +86,14 @@ input_dict = {necker_mech: inputs}
 necker_system.run(input_dict, num_trials=n_time_steps)
 
 # plot the dynamics
+colpal = sns.color_palette('colorblind', n_colors=n_percepts)
 acts = np.squeeze(necker_system.results)
-f, ax = plt.subplots(1, 1, figsize=(12, 5))
-ax.plot(acts[:, :n_nodes], color='red')
-ax.plot(acts[:, n_nodes:], color='blue')
-ax.set_title('temporal dynamics of the necker cube network')
+f, ax = plt.subplots(1, 1, figsize=(10, 6))
+ax.plot(acts[:, :n_nodes], color=colpal[0])
+ax.plot(acts[:, n_nodes:], color=colpal[1])
+ax.set_title('Temporal dynamics of the necker cube network')
 ax.set_xlabel('time steps')
 ax.set_ylabel('activation values')
+sns.despine()
+f.tight_layout()
+f.savefig(os.path.join(img_path, 'temp_dyn.png'))
