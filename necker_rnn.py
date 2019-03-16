@@ -71,7 +71,7 @@ necker_mech = pnl.RecurrentTransferMechanism(
 )
 necker_process = pnl.Process(pathway=[necker_mech])
 necker_system = pnl.System(processes=[necker_process])
-# necker_system.show_graph()
+necker_system.show_graph()
 
 # construct the inputs
 input_noise = .1
