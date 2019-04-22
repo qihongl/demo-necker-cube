@@ -4,7 +4,13 @@ this is a recurrent neural network for the
 <a href="https://en.wikipedia.org/wiki/Necker_cube">Necker cube</a> 
 bistable perception phenomenon
 
-here's the model from [1]: 
+play with the model on google colab: 
+<a href="https://colab.research.google.com/github/qihongl/demo-necker-cube/blob/master/necker_rnn.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open and Execute in Google Colaboratory">
+</a>
+
+
+here's the model [1]: 
 
 <img src="https://web.stanford.edu/group/pdplab/pdphandbook/CubeDiagram.png" alt="necker">
 
